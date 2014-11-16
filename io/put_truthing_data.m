@@ -17,7 +17,7 @@ function put_truthing_data(niftiLabels, outputDir, ignoreID)
 %% Load Data
 
 % Load nii
-filename = fullfile(data_dir,'lables.nii');
+filename = fullfile(niftiLabels);
 nii = load_nii(filename);
 
 data = nii.img;
@@ -56,7 +56,9 @@ end
 
 %% Save PNG Stack
 
+mkdir(outputDir)
+
 for i = 1:size(cell_data,3)
-    filename = fullfile(outputDir, 'truthLabels_' num2str(i),'.png');
+    filename = fullfile(outputDir, ['truthLabels_' num2str(i),'.png']);
     imwrite(cell_data(:,:,i), filename)
 end
