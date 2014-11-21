@@ -1,4 +1,4 @@
-function put_truthing_data(niftiLabels, outputDir, ignoreID)
+function put_truthing_data_local(niftiLabels, outputDir, ignoreID)
 
 % INPUTS:
 % niftiLabels:  NIFTI File from ITK Snap Truthing (full path)
@@ -57,8 +57,9 @@ end
 %% Save PNG Stack
 
 mkdir(outputDir)
+[~, prefixName, ~] = fileparts(filename);
 
 for i = 1:size(cell_data,3)
-    filename = fullfile(outputDir, ['truthLabels_' num2str(i),'.png']);
+    filename = fullfile(outputDir, [prefixName,'_labels_' num2str(i),'.png']);
     imwrite(cell_data(:,:,i), filename)
 end
